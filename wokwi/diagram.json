@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "author": "LabEnergy",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "board-ssd1306", "id": "oled", "top": -150, "left": -10, "attrs": { "i2cAddress": "0x3c" } },
+    { "type": "wokwi-led", "id": "bulb", "top": -40, "left": 220, "attrs": { "color": "yellow", "label": "Bombilla" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": 30, "left": 180, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-led", "id": "wifi", "top": -40, "left": 290, "attrs": { "color": "blue", "label": "Router" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": 30, "left": 250, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-buzzer", "id": "buzzer", "top": 120, "left": 230, "attrs": { "volume": "0.3" } },
+    { "type": "wokwi-servo", "id": "servo", "top": 230, "left": 200, "attrs": {} },
+    { "type": "wokwi-led-ring", "id": "ring", "top": -170, "left": 200, "attrs": { "pixels": "12" } },
+    { "type": "wokwi-dht22", "id": "dht", "top": 120, "left": -160, "attrs": { "temperature": "22", "humidity": "45" } },
+    { "type": "wokwi-potentiometer", "id": "pot", "top": 260, "left": -150, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+
+    [ "oled:GND", "esp:GND.2", "black", [] ],
+    [ "oled:VCC", "esp:3V3", "red", [] ],
+    [ "oled:SCL", "esp:22", "orange", [] ],
+    [ "oled:SDA", "esp:21", "green", [] ],
+
+    [ "esp:26", "r1:1", "yellow", [] ],
+    [ "r1:2", "bulb:A", "yellow", [] ],
+    [ "bulb:C", "esp:GND.2", "black", [] ],
+
+    [ "esp:27", "r2:1", "blue", [] ],
+    [ "r2:2", "wifi:A", "blue", [] ],
+    [ "wifi:C", "esp:GND.2", "black", [] ],
+
+    [ "buzzer:2", "esp:25", "purple", [] ],
+    [ "buzzer:1", "esp:GND.1", "black", [] ],
+
+    [ "servo:PWM", "esp:13", "orange", [] ],
+    [ "servo:V+", "esp:5V", "red", [] ],
+    [ "servo:GND", "esp:GND.1", "black", [] ],
+
+    [ "ring:DIN", "esp:15", "green", [] ],
+    [ "ring:VCC", "esp:5V", "red", [] ],
+    [ "ring:GND", "esp:GND.2", "black", [] ],
+
+    [ "dht:SDA", "esp:14", "cyan", [] ],
+    [ "dht:VCC", "esp:3V3", "red", [] ],
+    [ "dht:GND", "esp:GND.1", "black", [] ],
+
+    [ "pot:SIG", "esp:34", "violet", [] ],
+    [ "pot:VCC", "esp:3V3", "red", [] ],
+    [ "pot:GND", "esp:GND.1", "black", [] ]
+  ],
+  "dependencies": {}
+}
